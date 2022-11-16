@@ -3,6 +3,7 @@ const CONFIG = {
     LETTERS: '01ABCDEFGHIJKLMNOPQRSTUVXWYZぁぃぅくぐっょゖんイアゟブベヺマヌネゼタキヷヵクよユヨゞグ',
     MAX_LETTERS_LENGTH: 15,
     QUANTITY_ITEMS: 12,
+    LOW_OPACITY: 0.03,
     MAX_WIDTH: document.body.clientWidth - 100,
     MAX_HEIGHT: document.body.clientWidth / 5,
     SPEED: 130,

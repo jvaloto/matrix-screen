@@ -32,7 +32,7 @@ class Item{
 
     lessOpacity(){
         if(this._text.length >= this._textSize){
-            this._opacity -= 0.04;
+            this._opacity -= this._config.LOW_OPACITY;
         }
     }
 

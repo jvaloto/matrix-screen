@@ -4,13 +4,14 @@ body{
 }
 
 .text{
-    background: -webkit-linear-gradient(#000, #093B00, #238F10, #47FF41, #fff);
     color: green;
-    font-size: 20px;
+    font-size: 18px;
     font-style: bold;
     position: absolute;
     text-orientation: upright;
     writing-mode: vertical-rl;
+    text-shadow: 0 0 5px #47FF41;
+    background: -webkit-linear-gradient(#000, #47FF41, #fff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }

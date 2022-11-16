@@ -1,0 +1,16 @@
+body{
+    background-color: black;
+    overflow: hidden;
+}
+
+.text{
+    background: -webkit-linear-gradient(#000, #093B00, #238F10, #47FF41, #fff);
+    color: green;
+    font-size: 20px;
+    font-style: bold;
+    position: absolute;
+    text-orientation: upright;
+    writing-mode: vertical-rl;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

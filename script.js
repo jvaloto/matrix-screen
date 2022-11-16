@@ -1,80 +1,60 @@
-const letters = 'ABCDEFGHIJKLMNOPQRSTUVXWYZあbcでfgひjklもpっrsつゔxwyz01';
-const QUANTITY_ITEMS = 25;
-const SPEED = 140;
-const MAX_WIDTH = document.body.clientWidth - 100;
-const MAX_HEIGHT = document.body.clientWidth / 5;
 const divContent = document.querySelector('body');
-var listItems = new Array();
+const CONFIG = {
+    LETTERS: '01ABCDEFGHIJKLMNOPQRSTUVXWYZぁぃぅくぐっょゖんイアゟブベヺマヌネゼタキヷヵクよユヨゞグ',
+    MAX_LETTERS_LENGTH: 15,
+    QUANTITY_ITEMS: 12,
+    MAX_WIDTH: document.body.clientWidth - 100,
+    MAX_HEIGHT: document.body.clientWidth / 5,
+    SPEED: 130,
+};
 
-function create(items){
-    for(let i = 0; i < items; i ++){
-        let newItem = {
-            text: getLetter(),
-            textSize: getRandom(15),
-            marginTop: getRandom(MAX_HEIGHT),
-            marginLeft: getRandom(MAX_WIDTH),
-            opacity: 1
-        };
-
-        listItems.push(newItem);
-    }
-}
-
-function getLetter(){
-    return letters[getRandom(letters.length)];
-}
+var listItems;
 
 function start(){
     listItems = new Array();
 
-    create(QUANTITY_ITEMS);
+    create(CONFIG.QUANTITY_ITEMS);
 
     draw();
 }
 
-function getRandom(max){
-    return parseInt(Math.random() * max);
+function create(quantity){
+    for(let i = 0; i < quantity; i ++){
+        listItems.push(new Item(divContent, CONFIG));
+    }
 }
 
 function draw(){
     divContent.innerHTML = '';
 
-    let index = 0;
+    let indexToRemove = 0;
 
     listItems.forEach(item =>{
-        let newItem = document.createElement('span');
-        newItem.classList = 'text';
-        newItem.style.marginLeft = item.marginLeft;
-        newItem.style.marginTop = item.marginTop;
-        newItem.style.opacity = item.opacity;
-        newItem.innerHTML = item.text;
+        item.doIt();
 
-        divContent.appendChild(newItem);
-        
-        item.text += getLetter();
-        
-        if(item.text.length >= item.textSize){
-            item.opacity -= 0.04;
+        if(item.opacity < 0){
+            listItems.splice(indexToRemove, 1);
+            indexToRemove --;
         }
 
-        if(item.opacity <= 0){
-            listItems.splice(index, 1);
-        }
-
-        index ++;
+        indexToRemove ++;
     });
 
-    if(listItems.length <= (5 * QUANTITY_ITEMS) && getRandom(100) > 50){
-        create(getRandom(QUANTITY_ITEMS));
+    if(listItems.length <= (5 * CONFIG.QUANTITY_ITEMS) && Item.getRandom(100) > 50){
+        create(Item.getRandom(CONFIG.QUANTITY_ITEMS));
     }
 
     setTimeout(function(){
         draw();
-    }, SPEED);
+    }, CONFIG.SPEED);
 }
 
-start();
+// ---
 
 window.onresize = () =>{
     location.reload();
 };
+
+// ---
+
+start();

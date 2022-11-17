@@ -18,10 +18,8 @@ class Item{
         this._content.style.marginTop = this.marginTop;
         this._content.style.fontSize = this.fontSize;
 
-        var that = this;
-
-        setTimeout(function(){
-            that.start();
+        setTimeout(() => {
+            this.start();
         }, this.constructor.getRandom(1500));
     }
 
@@ -71,13 +69,11 @@ class Item{
     }
 
     start(){
-        var that = this;
-
         this.doIt();
 
         if(this.opacity > 0){
-            setTimeout(function(){
-                that.start();
+            setTimeout(() => {
+                this.start();
             }, this._speed);
         }else{
             this.delete();

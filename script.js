@@ -1,3 +1,4 @@
+var listItems;
 const divContent = document.querySelector('body');
 const CONFIG = {
     LETTERS: '01ABCDEFGHIJKLMNOPQRSTUVXWYZぁぃぅくぐっょゖんイアゟブベヺマヌネゼタキヷヵクよユヨゞグ',
@@ -10,8 +11,6 @@ const CONFIG = {
     SPEED: 100,
     PERC_SHOW_ITEMS: 85,
 };
-
-var listItems;
 
 function start(){
     listItems = new Array();
@@ -36,7 +35,7 @@ function removeItems(){
         create(Item.getRandom(CONFIG.QUANTITY_ITEMS));
     }
 
-    setTimeout(function(){
+    setTimeout(() => {
         removeItems();
     }, 300);
 }

@@ -6,6 +6,7 @@ const CONFIG = {
     LOW_OPACITY: 0.03,
     MAX_WIDTH: document.body.clientWidth - 100,
     MAX_HEIGHT: document.body.clientWidth / 5,
+    MAX_FONT_SIZE: 24,
     SPEED: 130,
 };
 

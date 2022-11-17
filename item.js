@@ -7,6 +7,7 @@ class Item{
         this._textSize = this.constructor.getRandom(this._config.MAX_LETTERS_LENGTH);
         this._marginTop = this.constructor.getRandom(this._config.MAX_HEIGHT);
         this._marginLeft = this.constructor.getRandom(this._config.MAX_WIDTH);
+        this._fontSize = this.constructor.getRandom(this._config.MAX_FONT_SIZE);
         this._opacity = 1;
     }
 
@@ -64,6 +65,7 @@ class Item{
         newItem.style.marginLeft = this._marginLeft;
         newItem.style.marginTop = this._marginTop;
         newItem.style.opacity = this._opacity;
+        newItem.style.fontSize = this._fontSize;
         newItem.innerHTML = this._text;
 
         this._content.appendChild(newItem);

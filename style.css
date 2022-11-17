@@ -13,6 +13,7 @@ body{
     writing-mode: vertical-rl;
     text-shadow: 0 0 5px #47FF41;
     background: -webkit-linear-gradient(#000, #47FF41, #fff);
+    white-space: nowrap;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }

@@ -1,14 +1,28 @@
 class Item{
-    constructor(content, config){
-        this._content = content;
+    constructor(contentParent, config){
+        this._contentParent = contentParent;
         this._config = config;
 
+        this._isDelete = false;
         this._text = this.getLetter();
         this._textSize = this.constructor.getRandom(this._config.MAX_LETTERS_LENGTH);
         this._marginTop = this.constructor.getRandom(this._config.MAX_HEIGHT);
         this._marginLeft = this.constructor.getRandom(this._config.MAX_WIDTH);
-        this._fontSize = this.constructor.getRandom(this._config.MAX_FONT_SIZE);
+        this._fontSize = this.constructor.getRandom(this._config.MAX_FONT_SIZE) + 10;
         this._opacity = 1;
+        this._speed = ( Math.random() * 600 ) + 100;
+
+        this._content = document.createElement('span');
+        this._content.classList = 'text';
+        this._content.style.marginLeft = this.marginLeft;
+        this._content.style.marginTop = this.marginTop;
+        this._content.style.fontSize = this.fontSize;
+
+        var that = this;
+
+        setTimeout(function(){
+            that.start();
+        }, this.constructor.getRandom(1500));
     }
 
     get text(){
@@ -29,6 +43,10 @@ class Item{
 
     get opacity(){
         return this._opacity;
+    }
+    
+    get isDelete(){
+        return this._isDelete;
     }
 
     lessOpacity(){
@@ -52,6 +70,20 @@ class Item{
         }
     }
 
+    start(){
+        var that = this;
+
+        this.doIt();
+
+        if(this.opacity > 0){
+            setTimeout(function(){
+                that.start();
+            }, this._speed);
+        }else{
+            this.delete();
+        }
+    }
+
     doIt(){
         this.draw();
         this.addLetter();
@@ -60,15 +92,16 @@ class Item{
     }
 
     draw(){
-        let newItem = document.createElement('span');
-        newItem.classList = 'text';
-        newItem.style.marginLeft = this._marginLeft;
-        newItem.style.marginTop = this._marginTop;
-        newItem.style.opacity = this._opacity;
-        newItem.style.fontSize = this._fontSize;
-        newItem.innerHTML = this._text;
+        this._content.style.opacity = this._opacity;
+        this._content.style.fontSize = this._fontSize;
+        this._content.innerHTML = this._text;
 
-        this._content.appendChild(newItem);
+        this._contentParent.appendChild(this._content);
+    }
+
+    delete(){
+        this._isDelete = true;
+        this._content.remove();
     }
 
     static getRandom(max){

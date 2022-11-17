@@ -2,12 +2,13 @@ const divContent = document.querySelector('body');
 const CONFIG = {
     LETTERS: '01ABCDEFGHIJKLMNOPQRSTUVXWYZぁぃぅくぐっょゖんイアゟブベヺマヌネゼタキヷヵクよユヨゞグ',
     MAX_LETTERS_LENGTH: 15,
-    QUANTITY_ITEMS: 12,
+    QUANTITY_ITEMS: ( 50 * ( ( document.body.clientWidth * 100 ) / 2560 ) ) / 100,
     LOW_OPACITY: 0.03,
     MAX_WIDTH: document.body.clientWidth - 100,
     MAX_HEIGHT: document.body.clientWidth / 5,
     MAX_FONT_SIZE: 24,
-    SPEED: 130,
+    SPEED: 100,
+    PERC_SHOW_ITEMS: 85,
 };
 
 var listItems;
@@ -17,7 +18,7 @@ function start(){
 
     create(Item.getRandom(CONFIG.QUANTITY_ITEMS));
 
-    draw();
+    removeItems();
 }
 
 function create(quantity){
@@ -26,29 +27,18 @@ function create(quantity){
     }
 }
 
-function draw(){
-    divContent.innerHTML = '';
+function removeItems(){
+    listItems = listItems.filter(e => !e.isDelete);
 
-    let indexToRemove = 0;
+    create(Item.getRandom(Item.getRandom(1)));
 
-    listItems.forEach(item =>{
-        item.doIt();
-
-        if(item.opacity < 0){
-            listItems.splice(indexToRemove, 1);
-            indexToRemove --;
-        }
-
-        indexToRemove ++;
-    });
-
-    if(listItems.length <= (5 * CONFIG.QUANTITY_ITEMS) && Item.getRandom(100) > 50){
+    if(listItems.length <= ( ( CONFIG.QUANTITY_ITEMS * CONFIG.PERC_SHOW_ITEMS ) / 100 )){
         create(Item.getRandom(CONFIG.QUANTITY_ITEMS));
     }
 
     setTimeout(function(){
-        draw();
-    }, CONFIG.SPEED);
+        removeItems();
+    }, 300);
 }
 
 // ---

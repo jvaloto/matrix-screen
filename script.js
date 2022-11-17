@@ -14,7 +14,7 @@ var listItems;
 function start(){
     listItems = new Array();
 
-    create(CONFIG.QUANTITY_ITEMS);
+    create(Item.getRandom(CONFIG.QUANTITY_ITEMS));
 
     draw();
 }

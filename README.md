@@ -22,4 +22,5 @@ SPEED // speed for each sentence (random value)
 PERC_SHOW_ITEMS // percentage of items in the screen, if it's lower than this value, create more items
 ```
 
-> set this page in full screen and enjoy it :)
+
+> [set this page in full screen and enjoy it :)](https://raw.githack.com/jvaloto/matrix-screen/master/index.html)
